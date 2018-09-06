@@ -25,7 +25,7 @@ RUN sed -i -- 's/.*#gzip  on;/    client_max_body_size '"$NUGET_MAX_FILE_SIZE"' 
 
 
 # sed -i -- 's/fastcgi_pass php/fastcgi_pass unix:\/run\/php\/php7.0-fpm.sock/' /etc/nginx/conf.d/default.conf && \
-RUN ssed -i -- 's/.*upload_max_filesize.*=.*/upload_max_filesize = '"$NUGET_MAX_FILE_SIZE"'/g' /etc/php/7.0/fpm/php.ini && \
+RUN sed -i -- 's/.*upload_max_filesize.*=.*/upload_max_filesize = '"$NUGET_MAX_FILE_SIZE"'/g' /etc/php/7.0/fpm/php.ini && \
     sed -i -- 's/.*post_max_size.*=.*/post_max_size = '"$NUGET_MAX_FILE_SIZE"'/g' /etc/php/7.0/fpm/php.ini && \
     sed -i -- 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.0/fpm/php.ini && \
     cat /etc/php/7.0/fpm/php.ini | grep upload_max_filesize
