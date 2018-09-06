@@ -20,12 +20,12 @@ COPY nginx.conf.example /etc/nginx/conf.d/default.conf
 RUN sed -i -- 's/\/var\/www\/simple-nuget-server/\/app/g' /etc/nginx/conf.d/default.conf  && \
     cat /etc/nginx/conf.d/default.conf 
 
-RUN sed -i -- 's/.*#gzip  on;/    client_max_body_size 20M;/g' /etc/nginx/nginx.conf && \
+RUN sed -i -- 's/.*#gzip  on;/    client_max_body_size 400M;/g' /etc/nginx/nginx.conf && \
     cat /etc/nginx/nginx.conf 
 
 
 # sed -i -- 's/fastcgi_pass php/fastcgi_pass unix:\/run\/php\/php7.0-fpm.sock/' /etc/nginx/conf.d/default.conf && \
-RUN sed -i -- 's/.*upload_max_filesize.*=.*/upload_max_filesize = 300M/g' /etc/php/7.0/fpm/php.ini && \
+RUN sed -i -- 's/.*upload_max_filesize.*=.*/upload_max_filesize = 400M/g' /etc/php/7.0/fpm/php.ini && \
     sed -i -- 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.0/fpm/php.ini && \
     cat /etc/php/7.0/fpm/php.ini | grep upload_max_filesize
 
